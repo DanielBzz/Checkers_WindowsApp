@@ -51,9 +51,9 @@ namespace Checkers
             }
         }
 
-        public bool InitPlayer(string i_Name)
+        public bool InitPlayer(string i_Name)       
         {
-            bool update = Player.IsValidUserName(i_Name);
+            bool update = Player.IsValidUserName(i_Name);   // we dont need it anymore
 
             if (update)
             {
@@ -64,7 +64,12 @@ namespace Checkers
             return update;
         }
 
-        public bool InitBoard(string i_Size)
+        public void InitBoard(eBoardSize i_Size)
+        {
+            m_Board = new Board((int)i_Size);
+        }
+
+        public bool InitBoard(string i_Size)            // we dont need it anymore
         {
             int size;
             bool update = Board.ValidSize(i_Size, out size);
