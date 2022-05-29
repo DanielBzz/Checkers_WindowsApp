@@ -35,6 +35,12 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="FormEndMatch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEndMatch.Designer.cs">
+      <DependentUpon>FormEndMatch.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormGameSettings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -48,7 +54,6 @@
       <DependentUpon>FormWelcome.cs</DependentUpon>
     </Compile>
     <Compile Include="GameManagement.cs" />
-
     <Compile Include="Program.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
