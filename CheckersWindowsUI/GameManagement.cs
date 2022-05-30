@@ -12,21 +12,20 @@ namespace CheckersWindowsUI
         private readonly GameLogic r_Game = new GameLogic();
         FormWelcome m_WelcomeForm = new FormWelcome();
         FormGameSettings m_SettingsForm = new FormGameSettings();
-        // FORM OF THE RUN GAME...
-        FormEndMatch m_EndMatchForm = new FormEndMatch();
+        FormGame m_GameForm = new FormGame();
+        //FormEndMatch m_EndMatchForm = new FormEndMatch();  // not sure we need it 
 
-        public void initForms()
+        public void initFormsEvent()
         {
             m_WelcomeForm.StartGame += welcomeForm_StartGame;
-            m_SettingsForm.DoneInit += settingsForm_DoneInit;   // AFTER WE DONE INIT WE NEED TO CALL THE RUN GAME FORM 
+            m_SettingsForm.DoneFillForm += settingsForm_DoneFillForm;   // AFTER WE DONE INIT WE NEED TO CALL THE RUN GAME FORM 
         }
 
         public void Run()
         {
             Application.EnableVisualStyles();
-            initForms();
+            initFormsEvent();
             m_WelcomeForm.ShowDialog();
-            
         }
     
         private void welcomeForm_StartGame()
@@ -34,13 +33,23 @@ namespace CheckersWindowsUI
             m_SettingsForm.ShowDialog();
         } 
         
-        private void settingsForm_DoneInit(DoneEventArgs e)
+        private void settingsForm_DoneFillForm()
         {
-            r_Game.InitBoard(e.boaedSize);
-            r_Game.InitPlayer(e.playerOneName);
+            r_Game.InitBoard(m_SettingsForm.BoardSize);
+            r_Game.InitPlayer(m_SettingsForm.PlayerOneName);
             r_Game.SwapPlayers();
-            r_Game.InitPlayer(e.playerTwoName);
+            r_Game.InitPlayer(m_SettingsForm.PlayerTwoName);
             r_Game.SwapPlayers();
+            StartNewSingleMatch();
+        }
+
+        private void StartNewSingleMatch()
+        {
+            r_Game.ResetGame();
+            m_GameForm.UpdateScoreLabels(r_Game.CurrentPlayer.Name, r_Game.CurrentPlayer.Score,
+                                        r_Game.OpponentPlayer.Name, r_Game.OpponentPlayer.Score);
+            // more things we should do berfore start a new game
+            m_GameForm.ShowDialog();
         }
     }
 }

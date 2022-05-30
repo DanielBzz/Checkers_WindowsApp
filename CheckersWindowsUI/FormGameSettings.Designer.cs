@@ -29,9 +29,9 @@ namespace CheckersWindowsUI
         /// </summary>
         private void InitializeComponent()
         {
-            this.radioButton6x6Size = new System.Windows.Forms.RadioButton();
-            this.radioButton8x8Size = new System.Windows.Forms.RadioButton();
-            this.radioButton10x10Size = new System.Windows.Forms.RadioButton();
+            this.radioButtonSmallSize = new System.Windows.Forms.RadioButton();
+            this.radioButtonMediumSize = new System.Windows.Forms.RadioButton();
+            this.radioButtonLargeSize = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -41,44 +41,41 @@ namespace CheckersWindowsUI
             this.buttonDone = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // radioButton6x6Size
+            // radioButtonSmallSize
             // 
-            this.radioButton6x6Size.AutoSize = true;
-            this.radioButton6x6Size.Location = new System.Drawing.Point(57, 59);
-            this.radioButton6x6Size.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.radioButton6x6Size.Name = "radioButton6x6Size";
-            this.radioButton6x6Size.Size = new System.Drawing.Size(51, 21);
-            this.radioButton6x6Size.TabIndex = 0;
-            this.radioButton6x6Size.TabStop = true;
-            this.radioButton6x6Size.Text = "6x6";
-            this.radioButton6x6Size.UseVisualStyleBackColor = true;
-            this.radioButton6x6Size.CheckedChanged += new System.EventHandler(this.radioButton6x6Size_CheckedChanged);
+            this.radioButtonSmallSize.AutoSize = true;
+            this.radioButtonSmallSize.Location = new System.Drawing.Point(57, 59);
+            this.radioButtonSmallSize.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.radioButtonSmallSize.Name = "radioButton6x6Size";
+            this.radioButtonSmallSize.Size = new System.Drawing.Size(51, 21);
+            this.radioButtonSmallSize.TabIndex = 0;
+            this.radioButtonSmallSize.TabStop = true;
+            this.radioButtonSmallSize.Text = "6x6";
+            this.radioButtonSmallSize.UseVisualStyleBackColor = true;
             // 
-            // radioButton8x8Size
+            // radioButtonMediusSize
             // 
-            this.radioButton8x8Size.AutoSize = true;
-            this.radioButton8x8Size.Location = new System.Drawing.Point(158, 59);
-            this.radioButton8x8Size.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.radioButton8x8Size.Name = "radioButton8x8Size";
-            this.radioButton8x8Size.Size = new System.Drawing.Size(51, 21);
-            this.radioButton8x8Size.TabIndex = 1;
-            this.radioButton8x8Size.TabStop = true;
-            this.radioButton8x8Size.Text = "8x8";
-            this.radioButton8x8Size.UseVisualStyleBackColor = true;
-            this.radioButton8x8Size.CheckedChanged += new System.EventHandler(this.radioButton8x8Size_CheckedChanged);
+            this.radioButtonMediumSize.AutoSize = true;
+            this.radioButtonMediumSize.Location = new System.Drawing.Point(158, 59);
+            this.radioButtonMediumSize.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.radioButtonMediumSize.Name = "radioButton8x8Size";
+            this.radioButtonMediumSize.Size = new System.Drawing.Size(51, 21);
+            this.radioButtonMediumSize.TabIndex = 1;
+            this.radioButtonMediumSize.TabStop = true;
+            this.radioButtonMediumSize.Text = "8x8";
+            this.radioButtonMediumSize.UseVisualStyleBackColor = true;
             // 
-            // radioButton10x10Size
+            // radioButtonBigSize
             // 
-            this.radioButton10x10Size.AutoSize = true;
-            this.radioButton10x10Size.Location = new System.Drawing.Point(268, 59);
-            this.radioButton10x10Size.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.radioButton10x10Size.Name = "radioButton10x10Size";
-            this.radioButton10x10Size.Size = new System.Drawing.Size(67, 21);
-            this.radioButton10x10Size.TabIndex = 2;
-            this.radioButton10x10Size.TabStop = true;
-            this.radioButton10x10Size.Text = "10x10";
-            this.radioButton10x10Size.UseVisualStyleBackColor = true;
-            this.radioButton10x10Size.CheckedChanged += new System.EventHandler(this.radioButton10x10Size_CheckedChanged);
+            this.radioButtonLargeSize.AutoSize = true;
+            this.radioButtonLargeSize.Location = new System.Drawing.Point(268, 59);
+            this.radioButtonLargeSize.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.radioButtonLargeSize.Name = "radioButton10x10Size";
+            this.radioButtonLargeSize.Size = new System.Drawing.Size(67, 21);
+            this.radioButtonLargeSize.TabIndex = 2;
+            this.radioButtonLargeSize.TabStop = true;
+            this.radioButtonLargeSize.Text = "10x10";
+            this.radioButtonLargeSize.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -138,7 +135,7 @@ namespace CheckersWindowsUI
             this.textBoxPlayer2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.textBoxPlayer2.Size = new System.Drawing.Size(167, 22);
             this.textBoxPlayer2.TabIndex = 9;
-            this.textBoxPlayer2.Text = "[ Computer ]";
+            this.textBoxPlayer2.Text = "Computer";
             this.textBoxPlayer2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // buttonDone
@@ -166,9 +163,9 @@ namespace CheckersWindowsUI
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.radioButton10x10Size);
-            this.Controls.Add(this.radioButton8x8Size);
-            this.Controls.Add(this.radioButton6x6Size);
+            this.Controls.Add(this.radioButtonLargeSize);
+            this.Controls.Add(this.radioButtonMediumSize);
+            this.Controls.Add(this.radioButtonSmallSize);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -178,7 +175,6 @@ namespace CheckersWindowsUI
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FormGameSettings";
-            this.Load += new System.EventHandler(this.FormGameSettings_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -186,9 +182,9 @@ namespace CheckersWindowsUI
 
         #endregion
 
-        private System.Windows.Forms.RadioButton radioButton6x6Size;
-        private System.Windows.Forms.RadioButton radioButton8x8Size;
-        private System.Windows.Forms.RadioButton radioButton10x10Size;
+        private System.Windows.Forms.RadioButton radioButtonSmallSize;
+        private System.Windows.Forms.RadioButton radioButtonMediumSize;
+        private System.Windows.Forms.RadioButton radioButtonLargeSize;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;

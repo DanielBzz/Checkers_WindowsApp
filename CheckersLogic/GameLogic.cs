@@ -27,7 +27,7 @@ namespace Checkers
             }
         }
 
-        internal Player CurrentPlayer
+        public Player CurrentPlayer
         {
             get
             {
@@ -35,7 +35,7 @@ namespace Checkers
             }
         }
 
-        internal Player OpponentPlayer
+        public Player OpponentPlayer
         {
             get
             {

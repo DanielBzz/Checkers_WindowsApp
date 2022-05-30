@@ -41,6 +41,12 @@
     <Compile Include="FormEndMatch.Designer.cs">
       <DependentUpon>FormEndMatch.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormGame.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormGame.Designer.cs">
+      <DependentUpon>FormGame.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormGameSettings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,6 +82,9 @@
     <EmbeddedResource Include="FormEndMatch.resx">
       <DependentUpon>FormEndMatch.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormGame.resx">
+      <DependentUpon>FormGame.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormWelcome.resx">
       <DependentUpon>FormWelcome.cs</DependentUpon>
     </EmbeddedResource>
@@ -95,6 +104,9 @@
     <EmbeddedResource Include="FormGameSettings.resx">
       <DependentUpon>FormGameSettings.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\checkersBoard.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

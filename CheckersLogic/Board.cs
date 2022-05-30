@@ -5,13 +5,6 @@ namespace Checkers
 {
     public class Board
     {
-        //public enum eBoardSize
-        //{
-        //    Small = 6,
-        //    Medium = 8,
-        //    Large = 10,
-        //}
-
         private const GameTool k_Empty = null;
         private readonly GameTool[,] r_GameBoard;
         private readonly int r_Size;
