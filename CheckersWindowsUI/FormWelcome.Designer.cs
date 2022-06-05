@@ -74,7 +74,6 @@ namespace CheckersWindowsUI
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(679, 86);
             this.label1.TabIndex = 2;
-            //this.label1.Text = "HELLO AND WELCOME TO CHECKERS";
             this.label1.UseCompatibleTextRendering = true;
             // 
             // FormWelcome
@@ -89,6 +88,7 @@ namespace CheckersWindowsUI
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonQuit);
             this.Controls.Add(this.buttonStart);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormWelcome";
