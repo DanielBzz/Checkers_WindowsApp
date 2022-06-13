@@ -59,15 +59,5 @@ namespace CheckersWindowsUI.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap checkersBoard {
-            get {
-                object obj = ResourceManager.GetObject("checkersBoard", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
     }
 }

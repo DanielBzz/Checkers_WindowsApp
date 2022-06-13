@@ -19,6 +19,13 @@ namespace CheckersWindowsUI
         {
             m_WelcomeForm.StartGame += welcomeForm_StartGame;
             m_SettingsForm.DoneFillForm += settingsForm_DoneFillForm;   // AFTER WE DONE INIT WE NEED TO CALL THE RUN GAME FORM 
+            m_GameForm.ChoseMove += gameForm_ChoseMove;
+        }
+
+        private void gameForm_ChoseMove(Move move)
+        {
+            r_Game.ExecutePlayerMove(move);
+            // 
         }
 
         public void Run()
@@ -40,12 +47,14 @@ namespace CheckersWindowsUI
             r_Game.SwapPlayers();
             r_Game.InitPlayer(m_SettingsForm.PlayerTwoName);
             r_Game.SwapPlayers();
+            m_GameForm.initButtons((int)m_SettingsForm.BoardSize);
             StartNewSingleMatch();
         }
 
         private void StartNewSingleMatch()
         {
             r_Game.ResetGame();
+            m_GameForm.initMatrixToBoard(r_Game.Board);
             m_GameForm.UpdateScoreLabels(r_Game.CurrentPlayer.Name, r_Game.CurrentPlayer.Score,
                                         r_Game.OpponentPlayer.Name, r_Game.OpponentPlayer.Score);
             // more things we should do berfore start a new game

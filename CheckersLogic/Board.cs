@@ -15,6 +15,14 @@ namespace Checkers
             r_GameBoard = new GameTool[r_Size, r_Size];
         }
 
+        public int Size
+        {
+            get 
+            {
+                return r_Size;
+            }
+        }
+
         public GameTool this[int i_Row, int i_Colum]
         {
             get
