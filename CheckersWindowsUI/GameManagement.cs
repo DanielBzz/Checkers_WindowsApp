@@ -19,10 +19,10 @@ namespace CheckersWindowsUI
         {
             m_WelcomeForm.StartGame += welcomeForm_StartGame;
             m_SettingsForm.DoneFillForm += settingsForm_DoneFillForm;   // AFTER WE DONE INIT WE NEED TO CALL THE RUN GAME FORM 
-            m_GameForm.ChoseMove += gameForm_ChoseMove;
+            m_GameForm.chosenMove += gameForm_ChosenMove;
         }
 
-        private void gameForm_ChoseMove(Move move)
+        private void gameForm_ChosenMove(Move move)
         {
             r_Game.ExecutePlayerMove(move);
             // 

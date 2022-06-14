@@ -11,5 +11,4 @@ namespace Checkers
         Medium = 8,
         Large = 10,
     }
-
 }
