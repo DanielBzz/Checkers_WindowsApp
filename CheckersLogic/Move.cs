@@ -4,12 +4,17 @@ using System.Text;
 
 namespace Checkers
 {
+    public delegate void MoveEventHandler(Point i_From, Point i_Destination);
+    
     public class Move
     {
         private const int k_Jump2Squares = 2;
         private readonly bool m_EatMove;
         private Point m_CurrentPoint;
         private Point m_DestinationPoint;
+        public event MoveEventHandler MoveTool;
+        public event Action<Point> EatTool;
+        public event Action<Point> SwitchedToKing;
 
         public Move(Point i_From, Point i_To)
         {
@@ -35,12 +40,10 @@ namespace Checkers
         {
             GameTool toolToMove = io_GameBoard[m_CurrentPoint.Y, m_CurrentPoint.X];
 
-            io_GameBoard.RemoveToolFromSquare(toolToMove.Location);
-            io_GameBoard.AddToolToSquare(toolToMove, m_DestinationPoint);
-            toolToMove.Location = m_DestinationPoint;
+            OnMove(io_GameBoard, toolToMove);
             if (m_EatMove)
             {
-                skipOverTheOpponentTool(io_GameBoard, io_OpponentTools);
+                OnEat(io_GameBoard, io_OpponentTools);
                 io_PlayerMoves.Clear();
                 toolToMove.CheckOppurturnitiToEat(io_GameBoard, io_PlayerMoves);
             }
@@ -48,20 +51,44 @@ namespace Checkers
             switchToKing(toolToMove, io_GameBoard);
         }
 
-        private void switchToKing(GameTool io_Tool, Board i_GameBoard)
+        protected virtual void OnMove(Board io_GameBoard, GameTool io_ToolToMove)
         {
-            if (!io_Tool.IsKing() && i_GameBoard.ToolInEndLine(io_Tool))
+            io_GameBoard.RemoveToolFromSquare(io_ToolToMove.Location);
+            io_GameBoard.AddToolToSquare(io_ToolToMove, m_DestinationPoint);
+            io_ToolToMove.Location = m_DestinationPoint;
+            if (MoveTool != null)
             {
-                io_Tool.MakeKing();
+                MoveTool.Invoke(m_CurrentPoint, m_DestinationPoint);
             }
         }
 
-        private void skipOverTheOpponentTool(Board io_GameBoard, List<GameTool> io_OpponentTools)
+        protected virtual void OnEat(Board io_GameBoard, List<GameTool> io_OpponentTools)
         {
             GameTool toolToDelete = io_GameBoard[(m_CurrentPoint.Y + m_DestinationPoint.Y) / 2, (m_CurrentPoint.X + m_DestinationPoint.X) / 2];
 
             io_GameBoard.RemoveToolFromSquare(toolToDelete.Location);
             io_OpponentTools.Remove(toolToDelete);
+            if (MoveTool != null)
+            {
+                EatTool.Invoke(toolToDelete.Location);
+            }
+        }
+
+        protected virtual void OnSwitchToKing(GameTool io_Tool)
+        {
+            io_Tool.MakeKing();
+            if (SwitchedToKing != null)
+            {
+                SwitchedToKing.Invoke(io_Tool.Location);
+            }
+        }
+
+        private void switchToKing(GameTool io_Tool, Board i_GameBoard)
+        {
+            if (!io_Tool.IsKing() && i_GameBoard.ToolInEndLine(io_Tool))
+            {
+                OnSwitchToKing(io_Tool);
+            }
         }
     }
 }

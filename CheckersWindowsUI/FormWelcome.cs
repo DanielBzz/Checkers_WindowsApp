@@ -4,11 +4,9 @@ using Checkers;
 
 namespace CheckersWindowsUI
 {
-    public delegate void StartEventHandler();
-
     public partial class FormWelcome : Form
     {
-        public event StartEventHandler StartGame;
+        public event EventHandler StartGame;
 
         public FormWelcome()
         {
@@ -29,7 +27,7 @@ namespace CheckersWindowsUI
         {
             if (StartGame != null)
             {
-                StartGame();
+                StartGame(this, null);
             }
         }
     }

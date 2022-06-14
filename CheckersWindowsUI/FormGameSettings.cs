@@ -4,11 +4,9 @@ using Checkers;
 
 namespace CheckersWindowsUI
 {
-    public delegate void DoneEventHandler();
-
     public partial class FormGameSettings : Form
     {
-        public event DoneEventHandler DoneFillForm;
+        public event EventHandler DoneFillForm;
 
         public FormGameSettings()
         {
@@ -81,7 +79,7 @@ namespace CheckersWindowsUI
                 this.Close();
                 if (DoneFillForm != null)
                 {
-                    DoneFillForm();
+                    DoneFillForm(this, null);
                 }
             }
         }

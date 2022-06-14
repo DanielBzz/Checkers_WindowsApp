@@ -10,6 +10,7 @@ namespace Checkers
         private Player m_OpponentPlayer = null;
         private Player m_Winner = null;
         private int? m_CurrentMatchWinnerScore = null;
+        public event Action<string> GameOver;
 
         public Board Board
         {
@@ -69,19 +70,6 @@ namespace Checkers
             m_Board = new Board((int)i_Size);
         }
 
-        public bool InitBoard(string i_Size)            // we dont need it anymore
-        {
-            int size;
-            bool update = Board.ValidSize(i_Size, out size);
-
-            if (update)
-            {
-                m_Board = new Board(size);
-            }
-
-            return update;
-        }
-
         public bool IsAvailableMove(Move i_Move)
         {
             bool isAvailabe = false;
@@ -135,16 +123,23 @@ namespace Checkers
             m_OpponentPlayer = tempPlayer;
         }
 
-        public bool IsGameOver()
+        public void checkIfGameOver()
         {
             bool isGameOver = m_CurrentPlayer.ValidMoves.Count == 0;
 
             if (isGameOver)
             {
-                updateWinnerScore(m_OpponentPlayer, m_CurrentPlayer);
+                OnGameOver();
             }
+        }
 
-            return isGameOver;
+        protected virtual void OnGameOver()
+        { 
+            updateWinnerScore(m_OpponentPlayer, m_CurrentPlayer);
+            if (GameOver != null)
+            {
+                GameOver.Invoke(m_Winner.Name);
+            }
         }
 
         public void ResetGame()

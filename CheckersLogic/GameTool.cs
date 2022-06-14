@@ -26,14 +26,14 @@ namespace Checkers
             Right = 1,
         }
 
-        private eTeamSign m_TeamSign;
+        private readonly eTeamSign r_TeamSign;
         private eToolSign m_ToolSign;
         private eToolValue m_Rank;
         private Point m_Location;
 
         public GameTool(eTeamSign i_Team, Point i_Location)
         {
-            m_TeamSign = i_Team;
+            r_TeamSign = i_Team;
             m_ToolSign = (eToolSign)i_Team;
             m_Location = i_Location;
             m_Rank = eToolValue.Regular;
@@ -43,7 +43,7 @@ namespace Checkers
         {
             get
             {
-                return m_TeamSign;
+                return r_TeamSign;
             }
         }
 
@@ -84,12 +84,12 @@ namespace Checkers
         public void MakeKing()
         {
             m_Rank = eToolValue.King;
-            m_ToolSign = m_TeamSign == eTeamSign.PlayerX ? eToolSign.ToolXKing : eToolSign.ToolOKing;
+            m_ToolSign = r_TeamSign == eTeamSign.PlayerX ? eToolSign.ToolXKing : eToolSign.ToolOKing;
         }
 
         public eDirection GetToolDirection()
         {
-            return m_TeamSign == eTeamSign.PlayerX ? eDirection.Up : eDirection.Down;
+            return r_TeamSign == eTeamSign.PlayerX ? eDirection.Up : eDirection.Down;
         }
 
         public void AddValidMovesForTool(Board i_GameBoard, List<Move> io_PlayerValidMoves)
@@ -139,7 +139,7 @@ namespace Checkers
 
         private bool checkIfOpponentInNextSquare(Point i_AfterMove, Board i_GameBoard)
         {
-            return i_GameBoard.IsPointInBoard(i_AfterMove) && i_GameBoard.IsOpponentInSquare(i_AfterMove, m_TeamSign);
+            return i_GameBoard.IsPointInBoard(i_AfterMove) && i_GameBoard.IsOpponentInSquare(i_AfterMove, r_TeamSign);
         }
 
         private void addOneDirectionValidEatMoves(Board i_GameBoard, List<Move> io_PlayerValidMoves, eDirection i_ToolDirection)

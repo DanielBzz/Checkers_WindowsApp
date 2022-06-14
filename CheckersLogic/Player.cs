@@ -16,7 +16,7 @@ namespace Checkers
         private readonly eTeamSign r_Team;
         private int m_Score = 0;
         private string m_LastMove;
-        private List<GameTool> m_PlayerTools = new List<GameTool>();
+        private readonly List<GameTool> r_PlayerTools = new List<GameTool>();
         private List<Move> m_ValidMovesList = new List<Move>();
 
         public Player(string i_PlayerName, eTeamSign i_Team)
@@ -72,7 +72,7 @@ namespace Checkers
         {
             get
             {
-                return m_PlayerTools;
+                return r_PlayerTools;
             }
         }
 
@@ -111,7 +111,7 @@ namespace Checkers
         public void ResetPlayerForNewGame()
         {
             m_LastMove = null;
-            m_PlayerTools.Clear();
+            r_PlayerTools.Clear();
             m_ValidMovesList.Clear();
         }
     }
