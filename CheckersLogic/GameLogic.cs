@@ -82,7 +82,7 @@ namespace Checkers
             return update;
         }
 
-        public bool IsAvailabeMove(Move i_Move)
+        public bool IsAvailableMove(Move i_Move)
         {
             bool isAvailabe = false;
 

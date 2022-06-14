@@ -29,15 +29,16 @@ namespace CheckersWindowsUI
         {
             squaresBoard = new PictureBox[i_BoardSize, i_BoardSize];
 
-            for (int lineNumber = 0; lineNumber < i_BoardSize; lineNumber++)
+            for (int row = 0; row < i_BoardSize; row++)
             {
-                for (int columnNumber = 0; columnNumber < i_BoardSize; columnNumber++)
+                for (int column = 0; column < i_BoardSize; column++)
                 {
-                    squaresBoard[lineNumber, columnNumber] = new PictureBox();
-                    squaresBoard[lineNumber, columnNumber].Size = new System.Drawing.Size(k_LengthOfSquare-10, k_LengthOfSquare-10);
-                    squaresBoard[lineNumber, columnNumber].Location = new System.Drawing.Point(lineNumber * k_LengthOfSquare, columnNumber * k_LengthOfSquare);
-                    squaresBoard[lineNumber, columnNumber].BackColor = lineNumber % 2 == 0 ? Color.Red : Color.Green; // for test
-                    splitContainer1.Panel2.Controls.Add(squaresBoard[lineNumber, columnNumber]);
+                    squaresBoard[row, column] = new PictureBox();
+                    squaresBoard[row, column].Size = new System.Drawing.Size(k_LengthOfSquare-10, k_LengthOfSquare-10);
+                    squaresBoard[row, column].Location = new System.Drawing.Point(column * k_LengthOfSquare, row * k_LengthOfSquare);
+                    squaresBoard[row, column].Click += pictureBox_Clicked;
+                    squaresBoard[row, column].BackColor = Color.LightGreen; 
+                    splitContainer1.Panel2.Controls.Add(squaresBoard[row, column]);
                 }      
             }
         }
@@ -54,7 +55,6 @@ namespace CheckersWindowsUI
                     }
                     else if (i_Board[i,j] != null)
                     {
-
                         squaresBoard[i, j].BackColor = i_Board[i, j].TeamSign == eTeamSign.PlayerX ?
                            Color.White : Color.CadetBlue;      // need to put a picture for team instead of color
                     }
@@ -62,28 +62,39 @@ namespace CheckersWindowsUI
             }
         }
 
+        public void SwapPictures(Checkers.Point i_From, Checkers.Point i_Destination)
+        {
+            Image tempImage = squaresBoard[i_From.Y, i_From.X].Image;
+
+            squaresBoard[i_From.Y, i_From.X].Image = squaresBoard[i_Destination.Y, i_Destination.X].Image;
+            squaresBoard[i_Destination.Y, i_Destination.X].Image = tempImage;
+        }
+
         private void pictureBox_Clicked(object sender, EventArgs e)
         {
-            PictureBox gameTool = sender as PictureBox;
+            PictureBox chosenPictureBox = sender as PictureBox;
 
-            if (gameTool.Image != null)
+            if (chosenPictureBox.Image != null)
             {
                 if (toolChosen == null)
                 {
-                    toolChosen = gameTool;
-                    gameTool.BackColor = Color.LightBlue;
+                    toolChosen = chosenPictureBox;
+                    chosenPictureBox.BackColor = Color.LightBlue;
                 }
-                else if (toolChosen == gameTool)
+                else if (toolChosen == chosenPictureBox)
                 {
                     toolChosen = null;
-                    gameTool.BackColor = Color.Transparent;
+                    chosenPictureBox.BackColor = Color.Transparent;
                 }
                 else
                 {
+                    Checkers.Point fromLocation = new Checkers.Point(toolChosen.Location.X / k_LengthOfSquare, toolChosen.Location.Y / k_LengthOfSquare);
+                    Checkers.Point toLocation = new Checkers.Point(chosenPictureBox.Location.X / k_LengthOfSquare, chosenPictureBox.Location.Y / k_LengthOfSquare);
+                    Move nextMove = new Move(fromLocation,toLocation);
+                    
                     toolChosen = null;
-                    gameTool.BackColor = Color.Transparent;
-                    //Checkers.Move nextMove = new Move(); // need to get the point of both location
-                    //ChoseMove(nextMove);
+                    chosenPictureBox.BackColor = Color.Transparent;
+                    chosenMove(nextMove);
                 }
             }
         }
