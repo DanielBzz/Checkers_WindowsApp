@@ -17,7 +17,7 @@ namespace CheckersWindowsUI
 
         private void FormWelcome_Load(object sender, EventArgs e)
         {
-            this.label1.Text = GameMessages.GameIntro();
+            this.label1.Text = "HELLO AND WELCOME TO CHECKERS, ENJOY!";
         }
 
         private void buttonQuit_Click(object sender, EventArgs e)

@@ -5,10 +5,9 @@ using System.Text;
 
 namespace Checkers
 {
-    public enum eBoardSize
+    public enum eTeamSign
     {
-        Small = 6,
-        Medium = 8,
-        Large = 10,
+        PlayerO = 'O',
+        PlayerX = 'X',
     }
 }

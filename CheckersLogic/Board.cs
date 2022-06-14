@@ -75,46 +75,9 @@ namespace Checkers
             return r_GameBoard[i_SquareLocation.Y, i_SquareLocation.X] == k_Empty;
         }
 
-        public bool IsOpponentInSquare(Point i_SquareLocation, GameTool.eTeamSign i_ToolTeam)
+        public bool IsOpponentInSquare(Point i_SquareLocation, eTeamSign i_ToolTeam)
         {
             return !IsSquareEmpty(i_SquareLocation) && r_GameBoard[i_SquareLocation.Y, i_SquareLocation.X].TeamSign != i_ToolTeam;
-        }
-
-        public override string ToString()
-        {
-            StringBuilder boardInString = new StringBuilder();
-            string horizontalEqualsLine = createEqualsLine(r_Size);
-
-            boardInString.Append(" ");
-            for (char c = 'A'; c < r_Size + 'A'; c++)
-            {
-                boardInString.Append(string.Format("  {0} ", c));
-            }
-
-            boardInString.Append(Environment.NewLine);
-            for (int i = 0; i < r_Size; i++)
-            {
-                boardInString.Append(horizontalEqualsLine);
-                boardInString.Append(string.Format("{0}", (char)(i + 'a')));
-                for (int j = 0; j < r_Size; j++)
-                {
-                    if (r_GameBoard[i, j] == k_Empty)
-                    {
-                        boardInString.Append("| " + " " + " ");
-                    }
-                    else
-                    {
-                        boardInString.Append("| " + (char)r_GameBoard[i, j].ToolSign + " ");
-                    }
-                }
-
-                boardInString.Append("|");
-                boardInString.Append(Environment.NewLine);
-            }
-
-            boardInString.Append(horizontalEqualsLine);
-
-            return boardInString.ToString();
         }
 
         public void InitializeBoard(Player io_Player1, Player io_Player2)
@@ -166,21 +129,6 @@ namespace Checkers
                     }
                 }
             }
-        }
-
-        private string createEqualsLine(int i_Size)
-        {
-            StringBuilder equalLine = new StringBuilder();
-
-            equalLine.Append(" ");
-            for (int j = 0; j < i_Size; j++)
-            {
-                equalLine.Append("====");
-            }
-
-            equalLine.Append("=" + Environment.NewLine);
-
-            return equalLine.ToString();
         }
     }
 }

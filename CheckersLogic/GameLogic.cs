@@ -57,7 +57,7 @@ namespace Checkers
 
             if (update)
             {
-                GameTool.eTeamSign sign = m_OpponentPlayer == null ? GameTool.eTeamSign.PlayerX : GameTool.eTeamSign.PlayerO;
+                eTeamSign sign = m_OpponentPlayer == null ? eTeamSign.PlayerX : eTeamSign.PlayerO;
                 m_CurrentPlayer = new Player(i_Name, sign);
             }
 
@@ -77,19 +77,6 @@ namespace Checkers
             if (update)
             {
                 m_Board = new Board(size);
-            }
-
-            return update;
-        }
-
-        public bool CheckOpponentType(string i_UserInput, ref string io_PlayerType)
-        {
-            Player.ePlayerType humanOrComputer;
-            bool update = Player.ValidPlayerType(i_UserInput, out humanOrComputer);
-
-            if (update)
-            {
-                io_PlayerType = humanOrComputer == Player.ePlayerType.Human ? "Human" : "Computer";
             }
 
             return update;
@@ -162,7 +149,7 @@ namespace Checkers
 
         public void ResetGame()
         {
-            if (m_CurrentPlayer.Team == GameTool.eTeamSign.PlayerO)
+            if (m_CurrentPlayer.Team == eTeamSign.PlayerO)
             {
                 SwapPlayers();
             }
@@ -190,16 +177,6 @@ namespace Checkers
         public bool IsComputerTurn()
         {
             return m_CurrentPlayer.IsComputer();
-        }
-
-        public string BoardToString()
-        {
-            return m_Board.ToString();
-        }
-
-        public KeyValuePair<bool, Move> TryDecodeUserInputToMove(string i_Move)
-        {
-            return Move.TryDecodeUserInputToMove(i_Move);
         }
 
         private void updateWinnerScore(Player i_Winner, Player i_Loser)

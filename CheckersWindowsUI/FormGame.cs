@@ -59,7 +59,7 @@ namespace CheckersWindowsUI
                     }
                     else if (i_Board[i,j] != null)
                     {
-                        squaresBoard[i, j].BackColor = i_Board[i, j].TeamSign == GameTool.eTeamSign.PlayerX ?
+                        squaresBoard[i, j].BackColor = i_Board[i, j].TeamSign == eTeamSign.PlayerX ?
                            Color.White : Color.CadetBlue;      // need to put a picture for team instead of color
                     }
 
