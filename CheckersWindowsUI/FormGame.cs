@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using Checkers;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace CheckersWindowsUI
 {
-    public delegate void choseMoveEventHandler(Move move);
+    public delegate void chosenMoveEventHandler(Move i_Move);
 
     public partial class FormGame : Form
     {
         const int k_LengthOfSquare = 50;    // should be 80
-        public event choseMoveEventHandler ChoseMove;
+        public event chosenMoveEventHandler chosenMove;
         PictureBox[,] squaresBoard;
         PictureBox toolChosen = null;
 
@@ -59,10 +54,10 @@ namespace CheckersWindowsUI
                     }
                     else if (i_Board[i,j] != null)
                     {
+
                         squaresBoard[i, j].BackColor = i_Board[i, j].TeamSign == eTeamSign.PlayerX ?
                            Color.White : Color.CadetBlue;      // need to put a picture for team instead of color
                     }
-
                 }
             }
         }
