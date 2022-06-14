@@ -26,29 +26,6 @@ namespace Checkers
             return isEqual;
         }
 
-        public static KeyValuePair<bool, Move> TryDecodeUserInputToMove(string i_Move)
-        {
-            bool validInput = i_Move.Length == 5 && char.IsUpper(i_Move, 0) && char.IsUpper(i_Move, 3)
-                && char.IsLower(i_Move, 1) && char.IsLower(i_Move, 4)
-                && i_Move[2] == '>';    // Input built as the following template : Aa>Bb
-            Move newMove = null;
-
-            if (validInput)
-            {
-                newMove = decodeUserInputToMove(i_Move);
-            }
-
-            return new KeyValuePair<bool, Move>(validInput, newMove);
-        }
-
-        private static Move decodeUserInputToMove(string i_Move)
-        {
-            Point moveFrom = new Point((int)(i_Move[0] - 'A'), (int)(i_Move[1] - 'a'));
-            Point moveTo = new Point((int)(i_Move[3] - 'A'), (int)(i_Move[4] - 'a'));
-
-            return new Move(moveFrom, moveTo);
-        }
-
         public bool IsAnEatingStep()
         {
             return m_EatMove;
@@ -69,19 +46,6 @@ namespace Checkers
             }
 
             switchToKing(toolToMove, io_GameBoard);
-        }
-
-        public override string ToString()
-        {
-            StringBuilder moveInString = new StringBuilder();
-
-            moveInString.Append(string.Format("{0}", (char)(m_CurrentPoint.X + 'A')));
-            moveInString.Append(string.Format("{0}", (char)(m_CurrentPoint.Y + 'a')));
-            moveInString.Append(">");
-            moveInString.Append(string.Format("{0}", (char)(m_DestinationPoint.X + 'A')));
-            moveInString.Append(string.Format("{0}", (char)(m_DestinationPoint.Y + 'a')));
-
-            return moveInString.ToString();
         }
 
         private void switchToKing(GameTool io_Tool, Board i_GameBoard)

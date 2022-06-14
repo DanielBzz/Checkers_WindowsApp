@@ -1,4 +1,4 @@
-﻿using Checkers;
+using Checkers;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -54,9 +54,9 @@ namespace CheckersWindowsUI
                     }
                     else if (i_Board[i,j] != null)
                     {
-                        squaresBoard[i, j].Image = Image.FromFile(@"Resources\BlackTool.png");
-                        // i_Board[i, j].TeamSign == GameTool.eTeamSign.PlayerX ?
-                        //Color.White : Color.CadetBlue;      // need to put a picture for team instead of color
+
+                        squaresBoard[i, j].BackColor = i_Board[i, j].TeamSign == eTeamSign.PlayerX ?
+                           Color.White : Color.CadetBlue;      // need to put a picture for team instead of color
                     }
                 }
             }

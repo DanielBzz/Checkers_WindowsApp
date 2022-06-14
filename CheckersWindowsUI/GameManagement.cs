@@ -24,8 +24,11 @@ namespace CheckersWindowsUI
 
         private void gameForm_ChosenMove(Move move)
         {
-            r_Game.ExecutePlayerMove(move);
-            // 
+            if (r_Game.IsAvailabeMove(i_Move))
+            {
+                r_Game.ExecutePlayerMove(i_Move);
+                // add changes in the ui
+            }
         }
 
         public void Run()

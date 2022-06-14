@@ -13,13 +13,13 @@ namespace Checkers
         private const int k_MaxUserNameSize = 20;
         private readonly string r_Name;
         private readonly ePlayerType r_PlayerType;
-        private readonly GameTool.eTeamSign r_Team;
+        private readonly eTeamSign r_Team;
         private int m_Score = 0;
         private string m_LastMove;
         private List<GameTool> m_PlayerTools = new List<GameTool>();
         private List<Move> m_ValidMovesList = new List<Move>();
 
-        public Player(string i_PlayerName, GameTool.eTeamSign i_Team)
+        public Player(string i_PlayerName, eTeamSign i_Team)
         {
             r_Name = i_PlayerName;
             r_Team = i_Team;
@@ -39,7 +39,7 @@ namespace Checkers
             }
         }
 
-        public GameTool.eTeamSign Team
+        public eTeamSign Team
         {
             get
             {

@@ -4,12 +4,6 @@ namespace Checkers
 {
     public class GameTool
     {
-        public enum eTeamSign
-        {
-            PlayerO = 'O',
-            PlayerX = 'X',
-        }
-
         public enum eToolValue
         {
             Regular = 1,
