@@ -58,7 +58,7 @@ namespace Checkers
 
             if (update)
             {
-                eTeamSign sign = m_OpponentPlayer == null ? eTeamSign.PlayerX : eTeamSign.PlayerO;
+                eTeamSign sign = m_OpponentPlayer == null ? eTeamSign.PlayerBlack : eTeamSign.PlayerRed;
                 m_CurrentPlayer = new Player(i_Name, sign);
             }
 
@@ -144,7 +144,7 @@ namespace Checkers
 
         public void ResetGame()
         {
-            if (m_CurrentPlayer.Team == eTeamSign.PlayerO)
+            if (m_CurrentPlayer.Team == eTeamSign.PlayerRed)
             {
                 SwapPlayers();
             }

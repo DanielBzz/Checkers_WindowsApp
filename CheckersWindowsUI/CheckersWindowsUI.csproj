@@ -107,7 +107,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Resources\BlackKing.png" />
     <Content Include="Resources\BlackTool.png" />
+    <Content Include="Resources\RedKing.png" />
+    <Content Include="Resources\RedTool.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -62,6 +62,8 @@ namespace CheckersWindowsUI
             r_Game.SwapPlayers();
             r_GameForm.initButtons((int)r_SettingsForm.BoardSize);
             StartNewSingleMatch();
+            r_SettingsForm.Hide(); // consider switching to Dispose
+            r_WelcomeForm.Dispose();    
             r_GameForm.ShowDialog();
         }
 

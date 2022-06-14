@@ -7,7 +7,7 @@ namespace Checkers
 {
     public enum eTeamSign
     {
-        PlayerO = 'O',
-        PlayerX = 'X',
+        PlayerRed = 'O',
+        PlayerBlack = 'X',
     }
 }

@@ -84,12 +84,12 @@ namespace Checkers
         public void MakeKing()
         {
             m_Rank = eToolValue.King;
-            m_ToolSign = r_TeamSign == eTeamSign.PlayerX ? eToolSign.ToolXKing : eToolSign.ToolOKing;
+            m_ToolSign = r_TeamSign == eTeamSign.PlayerBlack ? eToolSign.ToolXKing : eToolSign.ToolOKing;
         }
 
         public eDirection GetToolDirection()
         {
-            return r_TeamSign == eTeamSign.PlayerX ? eDirection.Up : eDirection.Down;
+            return r_TeamSign == eTeamSign.PlayerBlack ? eDirection.Up : eDirection.Down;
         }
 
         public void AddValidMovesForTool(Board i_GameBoard, List<Move> io_PlayerValidMoves)

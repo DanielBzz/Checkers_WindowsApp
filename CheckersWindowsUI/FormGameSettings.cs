@@ -68,11 +68,11 @@ namespace CheckersWindowsUI
         {
             if (string.IsNullOrEmpty(textBoxPlayer1.Text))
             {
-                MessageBox.Show("Invalid player 1 name, insert name.");
+                MessageBox.Show(string.Format("Player 1 invalid name,{0}Try Again", Environment.NewLine));
             }
             else if (checkBoxPlayer2.Checked && string.IsNullOrEmpty(textBoxPlayer2.Text))
             {
-                MessageBox.Show(string.Format("Invalid player 2 name,{0}insert name or unchecked the box.", Environment.NewLine));
+                MessageBox.Show(string.Format("Player 2 invalid name,{0}Try Again", Environment.NewLine));
             }
             else
             {
