@@ -107,7 +107,6 @@ namespace Checkers
         public void ExecutePlayerMove(Move i_Move)
         {
             i_Move.MakeMove(m_Board, m_OpponentPlayer.PlayerTools, m_CurrentPlayer.ValidMoves);
-            m_CurrentPlayer.LastMove = i_Move.ToString();
         }
 
         public bool CheckForDoubleStrike(bool i_LastMoveEat)
@@ -159,7 +158,8 @@ namespace Checkers
         {
             Random random = new Random();
 
-            System.Threading.Thread.Sleep(2500);
+            //System.Threading.Thread.Sleep(2000);
+
             return m_CurrentPlayer.ValidMoves[random.Next(m_CurrentPlayer.ValidMoves.Count - 1)];
         }
 

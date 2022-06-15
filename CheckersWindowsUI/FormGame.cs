@@ -42,7 +42,7 @@ namespace CheckersWindowsUI
 
     public partial class FormGame : Form
     {
-        const int k_LengthOfSquare = 60;   
+        const int k_LengthOfSquare = 60;
         public event chosenMoveEventHandler chosenMove;
         public event Action NewMatch;
         private PictureBox[,] m_SquaresBoard;
@@ -51,7 +51,7 @@ namespace CheckersWindowsUI
 
         public eTeamSign CurrentTeamTurn
         {
-            set 
+            set
             {
                 m_CurrentTeamTurn = value;
             }
@@ -86,7 +86,7 @@ namespace CheckersWindowsUI
                     };
                     m_SquaresBoard[row, column].Click += pictureBox_Clicked;
                     splitContainer1.Panel2.Controls.Add(m_SquaresBoard[row, column]);
-                }      
+                }
             }
         }
 
@@ -151,7 +151,7 @@ namespace CheckersWindowsUI
                 r_ToolChosen = chosenPictureBox;
                 chosenPictureBox.BackColor = Color.LightBlue;
             }
-            else if(r_ToolChosen != null)
+            else if (r_ToolChosen != null)
             {
                 if (r_ToolChosen == chosenPictureBox)
                 {
@@ -160,7 +160,7 @@ namespace CheckersWindowsUI
                 }
                 else
                 {
-                    OnChosenMove(chosenPictureBox);  
+                    OnChosenMove(chosenPictureBox);
                 }
             }
         }
@@ -183,11 +183,16 @@ namespace CheckersWindowsUI
         {
             Move nextMove = new Move(i_FromLocation, i_ToLocation);
 
-            nextMove.MoveTool += nextMove_MoveTool;
-            nextMove.EatTool += nextMove_EatTool;
-            nextMove.SwitchedToKing += nextMove_switchKing;
+            RegisterMoveToEvents(nextMove);
 
             return nextMove;
+        }
+
+        public void RegisterMoveToEvents(Move io_Move)
+        {
+            io_Move.MoveTool += nextMove_MoveTool;
+            io_Move.EatTool += nextMove_EatTool;
+            io_Move.SwitchedToKing += nextMove_switchKing;
         }
 
         private void nextMove_switchKing(Checkers.Point i_Location)
@@ -216,16 +221,6 @@ namespace CheckersWindowsUI
             m_SquaresBoard[i_Destination.Y, i_Destination.X].Tag = m_SquaresBoard[i_From.Y, i_From.X].Tag;
             m_SquaresBoard[i_From.Y, i_From.X].Image = null;
             m_SquaresBoard[i_From.Y, i_From.X].Tag = null;
-        }
-
-        private void FormGame_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void labelPlayer2Score_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

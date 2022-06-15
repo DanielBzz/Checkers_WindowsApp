@@ -45,8 +45,21 @@ namespace CheckersWindowsUI
             r_Game.SwapPlayers();
             r_GameForm.CurrentTeamTurn = r_Game.CurrentPlayer.Team;
             r_Game.BulidMoveList();
+            //if (r_Game.IsComputerTurn())
+            //{
+            //    executeComputerTurn();
+            //}
             r_Game.checkIfGameOver();
         }
+
+        /*private void executeComputerTurn()
+        {
+                Move nextComputerMove = r_Game.GetComputerMove();
+                r_GameForm.RegisterMoveToEvents(nextComputerMove);
+                r_Game.ExecutePlayerMove(nextComputerMove);
+
+            endTurn();
+        }*/            // not working good
 
         private void welcomeForm_StartGame(object sender, EventArgs e)
         {

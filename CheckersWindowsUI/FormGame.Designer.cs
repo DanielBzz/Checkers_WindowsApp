@@ -44,7 +44,7 @@
             this.labelPlayer1Score.Location = new System.Drawing.Point(28, 9);
             this.labelPlayer1Score.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPlayer1Score.Name = "labelPlayer1Score";
-            this.labelPlayer1Score.Size = new System.Drawing.Size(88, 24);
+            this.labelPlayer1Score.Size = new System.Drawing.Size(75, 20);
             this.labelPlayer1Score.TabIndex = 0;
             this.labelPlayer1Score.Text = "label1";
             // 
@@ -55,14 +55,15 @@
             this.labelPlayer2Score.Location = new System.Drawing.Point(209, 9);
             this.labelPlayer2Score.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPlayer2Score.Name = "labelPlayer2Score";
-            this.labelPlayer2Score.Size = new System.Drawing.Size(88, 24);
+            this.labelPlayer2Score.Size = new System.Drawing.Size(75, 20);
             this.labelPlayer2Score.TabIndex = 1;
             this.labelPlayer2Score.Text = "label2";
-            this.labelPlayer2Score.Click += new System.EventHandler(this.labelPlayer2Score_Click);
             // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer1.IsSplitterFixed = true;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1.Margin = new System.Windows.Forms.Padding(2);
             this.splitContainer1.Name = "splitContainer1";
@@ -80,15 +81,15 @@
             this.splitContainer1.Panel2.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
             this.splitContainer1.Panel2.BackColor = System.Drawing.Color.Transparent;
             this.splitContainer1.Panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("splitContainer1.Panel2.BackgroundImage")));
-            this.splitContainer1.Size = new System.Drawing.Size(360, 400);
-            this.splitContainer1.SplitterDistance = 38;
+            this.splitContainer1.Size = new System.Drawing.Size(359, 391);
+            this.splitContainer1.SplitterDistance = 30;
             this.splitContainer1.SplitterWidth = 1;
             this.splitContainer1.TabIndex = 0;
             // 
             // FormGame
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(360, 400);
+            this.ClientSize = new System.Drawing.Size(359, 391);
             this.Controls.Add(this.splitContainer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -96,7 +97,6 @@
             this.Name = "FormGame";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Checkers";
-            this.Load += new System.EventHandler(this.FormGame_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
