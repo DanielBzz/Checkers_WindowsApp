@@ -42,7 +42,7 @@ namespace CheckersWindowsUI
 
     public partial class FormGame : Form
     {
-        const int k_LengthOfSquare = 60;    // should be 80
+        const int k_LengthOfSquare = 60;   
         public event chosenMoveEventHandler chosenMove;
         public event Action NewMatch;
         private PictureBox[,] m_SquaresBoard;
@@ -72,6 +72,8 @@ namespace CheckersWindowsUI
         {
             m_SquaresBoard = new PictureBox[i_BoardSize, i_BoardSize];
 
+            this.Size += new Size((i_BoardSize - 6) * k_LengthOfSquare, (i_BoardSize - 6) * k_LengthOfSquare);
+
             for (int row = 0; row < i_BoardSize; row++)
             {
                 for (int column = 0; column < i_BoardSize; column++)
@@ -80,7 +82,7 @@ namespace CheckersWindowsUI
                     {
                         Size = new System.Drawing.Size(k_LengthOfSquare, k_LengthOfSquare),
                         Location = new System.Drawing.Point(column * k_LengthOfSquare, row * k_LengthOfSquare),
-                        BackColor = Color.LightGreen // for test
+                        SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
                     };
                     m_SquaresBoard[row, column].Click += pictureBox_Clicked;
                     splitContainer1.Panel2.Controls.Add(m_SquaresBoard[row, column]);
@@ -109,15 +111,11 @@ namespace CheckersWindowsUI
                         {
                             m_SquaresBoard[i, j].Image = Properties.Resources.BlackTool;
                         }
-                        System.Drawing.Drawing2D.GraphicsPath gp = new System.Drawing.Drawing2D.GraphicsPath();
-                        gp.AddEllipse(m_SquaresBoard[i, j].DisplayRectangle);
-                        m_SquaresBoard[i, j].Region = new Region(gp);
-                        m_SquaresBoard[i, j].SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
                         m_SquaresBoard[i, j].Tag = teamSign;
                     }
                     else
                     {
-                        m_SquaresBoard[i, j].BackColor = Color.LightGreen;
+                        m_SquaresBoard[i, j].Image = null;
                         m_SquaresBoard[i, j].Tag = null;
                     }
                 }
@@ -157,7 +155,7 @@ namespace CheckersWindowsUI
             {
                 if (r_ToolChosen == chosenPictureBox)
                 {
-                    chosenPictureBox.BackColor = Color.LightGreen;
+                    chosenPictureBox.BackColor = Color.Transparent;
                     r_ToolChosen = null;
                 }
                 else
@@ -173,7 +171,7 @@ namespace CheckersWindowsUI
             Checkers.Point toLocation = new Checkers.Point(i_DestinationBox.Location.X / k_LengthOfSquare, i_DestinationBox.Location.Y / k_LengthOfSquare);
             Move nextMove = initNextMove(fromLocation, toLocation);
 
-            //toolChosen.BackColor = Color.Transparent;
+            r_ToolChosen.BackColor = Color.Transparent;
             r_ToolChosen = null;
             if (chosenMove != null)
             {
@@ -194,35 +192,38 @@ namespace CheckersWindowsUI
 
         private void nextMove_switchKing(Checkers.Point i_Location)
         {
-            // switch images for the box in loacation point
+            eTeamSign teamSign = (eTeamSign)m_SquaresBoard[i_Location.Y, i_Location.X].Tag;
+
+            if (teamSign == eTeamSign.PlayerRed)
+            {
+                m_SquaresBoard[i_Location.Y, i_Location.X].Image = Properties.Resources.RedKing;
+            }
+            else
+            {
+                m_SquaresBoard[i_Location.Y, i_Location.X].Image = Properties.Resources.BlackKing;
+            }
         }
 
         private void nextMove_EatTool(Checkers.Point i_Location)
         {
-            //squaresBoard[i_Location.Y, i_Location.X].Image = null;
-            m_SquaresBoard[i_Location.Y, i_Location.X].BackColor = Color.LightGreen;
+            m_SquaresBoard[i_Location.Y, i_Location.X].Image = null;
             m_SquaresBoard[i_Location.Y, i_Location.X].Tag = null;
         }
 
         private void nextMove_MoveTool(Checkers.Point i_From, Checkers.Point i_Destination)
         {
-            /*Image tempImage = squaresBoard[i_From.Y, i_From.X].Image;
-
-            squaresBoard[i_From.Y, i_From.X].Image = squaresBoard[i_Destination.Y, i_Destination.X].Image;
-            squaresBoard[i_Destination.Y, i_Destination.X].Image = tempImage;
-        */
-            Color tempImage = m_SquaresBoard[i_From.Y, i_From.X].BackColor;
-
-            m_SquaresBoard[i_From.Y, i_From.X].BackColor = m_SquaresBoard[i_Destination.Y, i_Destination.X].BackColor;
-            m_SquaresBoard[i_Destination.Y, i_Destination.X].BackColor= tempImage;
-
-            eTeamSign tempSign = (eTeamSign)m_SquaresBoard[i_From.Y, i_From.X].Tag;
-
-            m_SquaresBoard[i_From.Y, i_From.X].Tag = m_SquaresBoard[i_Destination.Y, i_Destination.X].Tag;
-            m_SquaresBoard[i_Destination.Y, i_Destination.X].Tag= tempSign;
+            m_SquaresBoard[i_Destination.Y, i_Destination.X].Image = m_SquaresBoard[i_From.Y, i_From.X].Image;
+            m_SquaresBoard[i_Destination.Y, i_Destination.X].Tag = m_SquaresBoard[i_From.Y, i_From.X].Tag;
+            m_SquaresBoard[i_From.Y, i_From.X].Image = null;
+            m_SquaresBoard[i_From.Y, i_From.X].Tag = null;
         }
 
         private void FormGame_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelPlayer2Score_Click(object sender, EventArgs e)
         {
 
         }
