@@ -45,21 +45,23 @@ namespace CheckersWindowsUI
             r_Game.SwapPlayers();
             r_GameForm.CurrentTeamTurn = r_Game.CurrentPlayer.Team;
             r_Game.BulidMoveList();
-            //if (r_Game.IsComputerTurn())
-            //{
-            //    executeComputerTurn();
-            //}
-            r_Game.checkIfGameOver();
+            if (!r_Game.checkIfGameOver() && r_Game.IsComputerTurn())
+            {
+                executeComputerTurn();
+            }
         }
 
-        /*private void executeComputerTurn()
+        private void executeComputerTurn()
         {
-                Move nextComputerMove = r_Game.GetComputerMove();
-                r_GameForm.RegisterMoveToEvents(nextComputerMove);
-                r_Game.ExecutePlayerMove(nextComputerMove);
-
-            endTurn();
-        }*/            // not working good
+            Move nextComputerMove = r_Game.GetComputerMove();
+            r_GameForm.RegisterMoveToEvents(nextComputerMove);
+            r_Game.ExecutePlayerMove(nextComputerMove);
+            if (!r_Game.CheckForDoubleStrike(nextComputerMove.IsAnEatingStep()))
+            {
+                endTurn();
+                // maybe keep pointing on the tool in the ui 
+            }
+        }
 
         private void welcomeForm_StartGame(object sender, EventArgs e)
         {
@@ -73,10 +75,10 @@ namespace CheckersWindowsUI
             r_Game.SwapPlayers();
             r_Game.InitPlayer(r_SettingsForm.PlayerTwoName);
             r_Game.SwapPlayers();
-            r_GameForm.initButtons((int)r_SettingsForm.BoardSize);
+            r_GameForm.InitBoard((int)r_SettingsForm.BoardSize);
             StartNewSingleMatch();
             r_SettingsForm.Hide(); // consider switching to Dispose
-            r_WelcomeForm.Dispose();    
+            r_WelcomeForm.Dispose();
             r_GameForm.ShowDialog();
         }
 

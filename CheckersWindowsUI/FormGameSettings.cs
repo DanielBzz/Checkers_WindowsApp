@@ -83,5 +83,10 @@ namespace CheckersWindowsUI
                 }
             }
         }
+
+        private void textBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = e.KeyChar == (char)Keys.Space;
+        }
     }
 }

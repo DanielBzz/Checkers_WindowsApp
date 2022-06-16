@@ -41,7 +41,7 @@
             // 
             this.labelPlayer1Score.AutoSize = true;
             this.labelPlayer1Score.Font = new System.Drawing.Font("MingLiU_HKSCS-ExtB", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPlayer1Score.Location = new System.Drawing.Point(28, 9);
+            this.labelPlayer1Score.Location = new System.Drawing.Point(2, 9);
             this.labelPlayer1Score.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPlayer1Score.Name = "labelPlayer1Score";
             this.labelPlayer1Score.Size = new System.Drawing.Size(75, 20);
@@ -52,7 +52,7 @@
             // 
             this.labelPlayer2Score.AutoSize = true;
             this.labelPlayer2Score.Font = new System.Drawing.Font("MingLiU_HKSCS-ExtB", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPlayer2Score.Location = new System.Drawing.Point(209, 9);
+            this.labelPlayer2Score.Location = new System.Drawing.Point(176, 9);
             this.labelPlayer2Score.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPlayer2Score.Name = "labelPlayer2Score";
             this.labelPlayer2Score.Size = new System.Drawing.Size(75, 20);

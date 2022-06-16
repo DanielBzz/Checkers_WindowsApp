@@ -52,17 +52,10 @@ namespace Checkers
             }
         }
 
-        public bool InitPlayer(string i_Name)       
+        public void InitPlayer(string i_Name)
         {
-            bool update = Player.IsValidUserName(i_Name);   // we dont need it anymore
-
-            if (update)
-            {
-                eTeamSign sign = m_OpponentPlayer == null ? eTeamSign.PlayerBlack : eTeamSign.PlayerRed;
-                m_CurrentPlayer = new Player(i_Name, sign);
-            }
-
-            return update;
+            eTeamSign sign = m_OpponentPlayer == null ? eTeamSign.PlayerBlack : eTeamSign.PlayerRed;
+            m_CurrentPlayer = new Player(i_Name, sign);
         }
 
         public void InitBoard(eBoardSize i_Size)
@@ -122,7 +115,7 @@ namespace Checkers
             m_OpponentPlayer = tempPlayer;
         }
 
-        public void checkIfGameOver()
+        public bool checkIfGameOver()
         {
             bool isGameOver = m_CurrentPlayer.ValidMoves.Count == 0;
 
@@ -130,6 +123,8 @@ namespace Checkers
             {
                 OnGameOver();
             }
+
+            return isGameOver;
         }
 
         protected virtual void OnGameOver()
@@ -158,12 +153,12 @@ namespace Checkers
         {
             Random random = new Random();
 
-            //System.Threading.Thread.Sleep(2000);
+            System.Threading.Thread.Sleep(4000);
 
             return m_CurrentPlayer.ValidMoves[random.Next(m_CurrentPlayer.ValidMoves.Count - 1)];
         }
 
-        public void CurrentPlayerQuitMatch()
+        public void CurrentPlayerQuitMatch()        // we dont need it in this version
         {
             SwapPlayers();
             m_CurrentPlayer.Score -= 3;

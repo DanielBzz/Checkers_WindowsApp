@@ -10,14 +10,12 @@ namespace Checkers
             Human,
         }
 
-        private const int k_MaxUserNameSize = 20;
         private readonly string r_Name;
         private readonly ePlayerType r_PlayerType;
         private readonly eTeamSign r_Team;
         private int m_Score = 0;
-        private string m_LastMove;
         private readonly List<GameTool> r_PlayerTools = new List<GameTool>();
-        private List<Move> m_ValidMovesList = new List<Move>();
+        private readonly List<Move> r_ValidMovesList = new List<Move>();
 
         public Player(string i_PlayerName, eTeamSign i_Team)
         {
@@ -55,19 +53,6 @@ namespace Checkers
             }
         }
 
-        public string LastMove
-        {
-            get
-            {
-                return m_LastMove;
-            }
-
-            set
-            {
-                m_LastMove = value;
-            }
-        }
-
         public List<GameTool> PlayerTools
         {
             get
@@ -80,27 +65,8 @@ namespace Checkers
         {
             get
             {
-                return m_ValidMovesList;
+                return r_ValidMovesList;
             }
-        }
-
-        public static bool IsValidUserName(string i_UserName)
-        {
-            bool nameContainSpaces = i_UserName.Contains(" ");
-
-            return i_UserName.Length <= k_MaxUserNameSize && !nameContainSpaces;
-        }
-
-        public static bool ValidPlayerType(string i_UserInput, out ePlayerType o_PlayerType)
-        {
-            bool isNumeric = ePlayerType.TryParse(i_UserInput, out o_PlayerType);
-
-            return isNumeric && legalPlayerType(o_PlayerType);
-        }
-
-        private static bool legalPlayerType(ePlayerType i_ValidPlayerType)
-        {
-            return i_ValidPlayerType == ePlayerType.Computer || i_ValidPlayerType == ePlayerType.Human;
         }
 
         public bool IsComputer()
@@ -110,9 +76,8 @@ namespace Checkers
 
         public void ResetPlayerForNewGame()
         {
-            m_LastMove = null;
             r_PlayerTools.Clear();
-            m_ValidMovesList.Clear();
+            r_ValidMovesList.Clear();
         }
     }
 }

@@ -68,12 +68,12 @@ namespace CheckersWindowsUI
             this.labelPlayer2Score.Text = string.Format("{0} : {1}", i_PlayerTwoName, i_PlayerTwoScore);
         }
 
-        public void initButtons(int i_BoardSize)
+        public void InitBoard(int i_BoardSize)
         {
+            int additionalSize = (i_BoardSize - (int)eBoardSize.Small) * k_LengthOfSquare;
+
+            this.Size += new Size(additionalSize, additionalSize);
             m_SquaresBoard = new PictureBox[i_BoardSize, i_BoardSize];
-
-            this.Size += new Size((i_BoardSize - 6) * k_LengthOfSquare, (i_BoardSize - 6) * k_LengthOfSquare);
-
             for (int row = 0; row < i_BoardSize; row++)
             {
                 for (int column = 0; column < i_BoardSize; column++)
@@ -84,6 +84,7 @@ namespace CheckersWindowsUI
                         Location = new System.Drawing.Point(column * k_LengthOfSquare, row * k_LengthOfSquare),
                         SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
                     };
+
                     m_SquaresBoard[row, column].Click += pictureBox_Clicked;
                     splitContainer1.Panel2.Controls.Add(m_SquaresBoard[row, column]);
                 }
@@ -92,31 +93,26 @@ namespace CheckersWindowsUI
 
         public void initMatrixToBoard(Board i_Board)
         {
-            for (int i = 0; i < i_Board.Size; ++i)
+            for (int row = 0; row < i_Board.Size; ++row)
             {
-                for (int j = 0; j < i_Board.Size; ++j)
+                for (int column = 0; column < i_Board.Size; ++column)
                 {
-                    if (i % 2 == 0 && j % 2 == 0)
+                    if (row % 2 == column % 2)
                     {
-                        m_SquaresBoard[i, j].Enabled = false;
+                        m_SquaresBoard[row, column].Enabled = false;
                     }
-                    else if (i_Board[i, j] != null)
+                    else if (i_Board[row, column] != null)
                     {
-                        eTeamSign teamSign = i_Board[i, j].TeamSign;
-                        if (teamSign == eTeamSign.PlayerRed)
-                        {
-                            m_SquaresBoard[i, j].Image = Properties.Resources.RedTool;
-                        }
-                        else
-                        {
-                            m_SquaresBoard[i, j].Image = Properties.Resources.BlackTool;
-                        }
-                        m_SquaresBoard[i, j].Tag = teamSign;
+                        eTeamSign teamSign = i_Board[row, column].TeamSign;
+                        m_SquaresBoard[row, column].Image = teamSign == eTeamSign.PlayerRed ? 
+                                                    Properties.Resources.RedTool : Properties.Resources.BlackTool;
+                        m_SquaresBoard[row, column].Tag = teamSign;
+
                     }
                     else
                     {
-                        m_SquaresBoard[i, j].Image = null;
-                        m_SquaresBoard[i, j].Tag = null;
+                        m_SquaresBoard[row, column].Image = null;
+                        m_SquaresBoard[row, column].Tag = null;
                     }
                 }
             }
@@ -149,7 +145,7 @@ namespace CheckersWindowsUI
             if (r_ToolChosen == null && chosenPictureBox.Tag is eTeamSign sign && sign.Equals(m_CurrentTeamTurn))
             {
                 r_ToolChosen = chosenPictureBox;
-                chosenPictureBox.BackColor = Color.LightBlue;
+                chosenPictureBox.BackColor = Color.LightSkyBlue;
             }
             else if (r_ToolChosen != null)
             {
