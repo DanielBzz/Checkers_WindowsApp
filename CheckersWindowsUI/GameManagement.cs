@@ -10,6 +10,7 @@ namespace CheckersWindowsUI
         private readonly FormWelcome r_WelcomeForm = new FormWelcome();
         private readonly FormGameSettings r_SettingsForm = new FormGameSettings();
         private readonly FormGame r_GameForm = new FormGame();
+        private Timer timer = new System.Windows.Forms.Timer();
 
         public void Run()
         {
@@ -25,6 +26,13 @@ namespace CheckersWindowsUI
             r_GameForm.chosenMove += gameForm_ChosenMove;
             r_Game.GameOver += r_GameForm.game_GameOver;
             r_GameForm.NewMatch += StartNewSingleMatch;
+            timer.Tick += Timer_Tick;
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            timer.Stop();
+            executeComputerTurn();
         }
 
         private void StartNewSingleMatch()
@@ -56,6 +64,12 @@ namespace CheckersWindowsUI
             if (!r_Game.CheckForDoubleStrike(nextComputerMove.IsAnEatingStep()))
             {
                 endTurn();
+            }
+            else
+            {
+                timer.Enabled = true;
+                timer.Interval = 500;
+                timer.Start();
             }
         }
 
