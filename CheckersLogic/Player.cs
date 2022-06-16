@@ -13,9 +13,9 @@ namespace Checkers
         private readonly string r_Name;
         private readonly ePlayerType r_PlayerType;
         private readonly eTeamSign r_Team;
-        private int m_Score = 0;
         private readonly List<GameTool> r_PlayerTools = new List<GameTool>();
         private readonly List<Move> r_ValidMovesList = new List<Move>();
+        private int m_Score = 0;
 
         public Player(string i_PlayerName, eTeamSign i_Team)
         {

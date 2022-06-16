@@ -5,16 +5,19 @@ using System.Text;
 namespace Checkers
 {
     public delegate void MoveEventHandler(Point i_From, Point i_Destination);
-    
+
     public class Move
     {
+        public event MoveEventHandler MoveTool;
+
+        public event Action<Point> EatTool;
+
+        public event Action<Point> SwitchedToKing;
+
         private const int k_Jump2Squares = 2;
         private readonly bool m_EatMove;
         private Point m_CurrentPoint;
         private Point m_DestinationPoint;
-        public event MoveEventHandler MoveTool;
-        public event Action<Point> EatTool;
-        public event Action<Point> SwitchedToKing;
 
         public Move(Point i_From, Point i_To)
         {

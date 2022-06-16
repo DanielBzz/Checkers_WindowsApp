@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Checkers;
 
@@ -20,11 +17,11 @@ namespace CheckersWindowsUI
             initFormsEvent();
             r_WelcomeForm.ShowDialog();
         }
-        
+
         public void initFormsEvent()
         {
             r_WelcomeForm.StartGame += welcomeForm_StartGame;
-            r_SettingsForm.DoneFillForm += settingsForm_DoneFillForm; ;
+            r_SettingsForm.DoneFillForm += settingsForm_DoneFillForm;
             r_GameForm.chosenMove += gameForm_ChosenMove;
             r_Game.GameOver += r_GameForm.game_GameOver;
             r_GameForm.NewMatch += StartNewSingleMatch;
@@ -59,14 +56,13 @@ namespace CheckersWindowsUI
             if (!r_Game.CheckForDoubleStrike(nextComputerMove.IsAnEatingStep()))
             {
                 endTurn();
-                // maybe keep pointing on the tool in the ui 
             }
         }
 
         private void welcomeForm_StartGame(object sender, EventArgs e)
         {
             r_SettingsForm.ShowDialog();
-        } 
+        }
 
         private void settingsForm_DoneFillForm(object sender, EventArgs e)
         {
@@ -75,7 +71,7 @@ namespace CheckersWindowsUI
             r_Game.SwapPlayers();
             r_Game.InitPlayer(r_SettingsForm.PlayerTwoName);
             r_Game.SwapPlayers();
-            r_GameForm.InitBoard((int)r_SettingsForm.BoardSize);
+            r_GameForm.InitBoardOnForm((int)r_SettingsForm.BoardSize);
             StartNewSingleMatch();
             r_SettingsForm.Hide(); // consider switching to Dispose
             r_WelcomeForm.Dispose();
@@ -89,11 +85,10 @@ namespace CheckersWindowsUI
                 r_Game.ExecutePlayerMove(i_Move);
                 if (!r_Game.CheckForDoubleStrike(i_Move.IsAnEatingStep()))
                 {
-                    endTurn();
-                    // maybe keep pointing on the tool in the ui 
+                    endTurn(); // maybe keep pointing on the tool in the ui
                 }
             }
-            else 
+            else
             {
                 r_GameForm.UnavailableMove();
             }

@@ -5,12 +5,13 @@ namespace Checkers
 {
     public class GameLogic
     {
+        public event Action<string> GameOver;
+
         private Board m_Board = null;
         private Player m_CurrentPlayer = null;
         private Player m_OpponentPlayer = null;
         private Player m_Winner = null;
         private int? m_CurrentMatchWinnerScore = null;
-        public event Action<string> GameOver;
 
         public Board Board
         {
@@ -128,7 +129,7 @@ namespace Checkers
         }
 
         protected virtual void OnGameOver()
-        { 
+        {
             updateWinnerScore(m_OpponentPlayer, m_CurrentPlayer);
             if (GameOver != null)
             {
@@ -153,12 +154,10 @@ namespace Checkers
         {
             Random random = new Random();
 
-            System.Threading.Thread.Sleep(4000);
-
             return m_CurrentPlayer.ValidMoves[random.Next(m_CurrentPlayer.ValidMoves.Count - 1)];
         }
 
-        public void CurrentPlayerQuitMatch()        // we dont need it in this version
+        public void CurrentPlayerQuitMatch() // we dont need it in this version
         {
             SwapPlayers();
             m_CurrentPlayer.Score -= 3;

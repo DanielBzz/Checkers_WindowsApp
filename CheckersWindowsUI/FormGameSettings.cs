@@ -54,7 +54,7 @@ namespace CheckersWindowsUI
             {
                 textBoxPlayer2.ReadOnly = false;
                 textBoxPlayer2.TextAlign = HorizontalAlignment.Left;
-                textBoxPlayer2.Text = "";
+                textBoxPlayer2.Text = string.Empty;
             }
             else
             {
@@ -76,7 +76,7 @@ namespace CheckersWindowsUI
             }
             else
             {
-                this.Close();
+                Close();
                 if (DoneFillForm != null)
                 {
                     DoneFillForm(this, null);

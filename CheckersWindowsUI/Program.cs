@@ -1,5 +1,4 @@
-﻿
-namespace CheckersWindowsUI
+﻿namespace CheckersWindowsUI
 {
     public class Program
     {

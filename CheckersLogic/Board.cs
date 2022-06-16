@@ -17,7 +17,7 @@ namespace Checkers
 
         public int Size
         {
-            get 
+            get
             {
                 return r_Size;
             }

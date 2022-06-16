@@ -15,12 +15,12 @@ namespace CheckersWindowsUI
 
         private void FormWelcome_Load(object sender, EventArgs e)
         {
-            this.label1.Text = "English Checkers";
+            label1.Text = "English Checkers";
         }
 
         private void buttonQuit_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void buttonStart_Click(object sender, EventArgs e)

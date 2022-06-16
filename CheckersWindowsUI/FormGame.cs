@@ -1,53 +1,22 @@
-using Checkers;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
+using Checkers;
 
 namespace CheckersWindowsUI
 {
-    //public class CirclePictureBox : PictureBox
-    //{
-    //    protected override void OnPaint(PaintEventArgs e)
-    //    {
-    //        System.Drawing.Brush brushImege;
-    //        try
-    //        {
-    //            Bitmap Imagem = new Bitmap(this.Image);
-    //            //get images of the same size as control
-    //            Imagem = new Bitmap(Imagem, new Size(this.Width - 1, this.Height - 1));
-    //            brushImege = new TextureBrush(Imagem);
-    //        }
-    //        catch
-    //        {
-    //            Bitmap Imagem = new Bitmap(this.Width - 1, this.Height - 1, PixelFormat.Format24bppRgb);
-    //            using (Graphics grp = Graphics.FromImage(Imagem))
-    //            {
-    //                grp.FillRectangle(
-    //                    Brushes.White, 0, 0, this.Width - 1, this.Height - 1);
-    //                Imagem = new Bitmap(this.Width - 1, this.Height - 1, grp);
-    //            }
-    //            brushImege = new TextureBrush(Imagem);
-    //        }
-    //        e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-    //        GraphicsPath path = new GraphicsPath();
-    //        path.AddEllipse(0, 0, this.Width - 1, this.Height - 1);
-    //        e.Graphics.FillPath(brushImege, path);
-    //        e.Graphics.DrawPath(Pens.Black, path);
-    //    }
-    //}
-
     public delegate void chosenMoveEventHandler(Move i_Move);
 
     public partial class FormGame : Form
     {
-        const int k_LengthOfSquare = 60;
         public event chosenMoveEventHandler chosenMove;
+
         public event Action NewMatch;
+
+        private const int k_LengthOfSquare = 60;
         private PictureBox[,] m_SquaresBoard;
         private PictureBox r_ToolChosen = null;
-        eTeamSign m_CurrentTeamTurn;
+        private eTeamSign m_CurrentTeamTurn;
 
         public eTeamSign CurrentTeamTurn
         {
@@ -64,15 +33,15 @@ namespace CheckersWindowsUI
 
         public void UpdateScoreLabels(string i_PlayerOneName, int i_PlayerOneScore, string i_PlayerTwoName, int i_PlayerTwoScore)
         {
-            this.labelPlayer1Score.Text = string.Format("{0} : {1}", i_PlayerOneName, i_PlayerOneScore);
-            this.labelPlayer2Score.Text = string.Format("{0} : {1}", i_PlayerTwoName, i_PlayerTwoScore);
+            labelPlayer1Score.Text = string.Format("{0} : {1}", i_PlayerOneName, i_PlayerOneScore);
+            labelPlayer2Score.Text = string.Format("{0} : {1}", i_PlayerTwoName, i_PlayerTwoScore);
         }
 
-        public void InitBoard(int i_BoardSize)
+        public void InitBoardOnForm(int i_BoardSize)
         {
             int additionalSize = (i_BoardSize - (int)eBoardSize.Small) * k_LengthOfSquare;
 
-            this.Size += new Size(additionalSize, additionalSize);
+            Size += new Size(additionalSize, additionalSize);
             m_SquaresBoard = new PictureBox[i_BoardSize, i_BoardSize];
             for (int row = 0; row < i_BoardSize; row++)
             {
@@ -82,7 +51,7 @@ namespace CheckersWindowsUI
                     {
                         Size = new System.Drawing.Size(k_LengthOfSquare, k_LengthOfSquare),
                         Location = new System.Drawing.Point(column * k_LengthOfSquare, row * k_LengthOfSquare),
-                        SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+                        SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage,
                     };
 
                     m_SquaresBoard[row, column].Click += pictureBox_Clicked;
@@ -104,10 +73,9 @@ namespace CheckersWindowsUI
                     else if (i_Board[row, column] != null)
                     {
                         eTeamSign teamSign = i_Board[row, column].TeamSign;
-                        m_SquaresBoard[row, column].Image = teamSign == eTeamSign.PlayerRed ? 
+                        m_SquaresBoard[row, column].Image = teamSign == eTeamSign.PlayerRed ?
                                                     Properties.Resources.RedTool : Properties.Resources.BlackTool;
                         m_SquaresBoard[row, column].Tag = teamSign;
-
                     }
                     else
                     {
@@ -125,8 +93,10 @@ namespace CheckersWindowsUI
 
         public void game_GameOver(string i_WinnerName)
         {
-            DialogResult result = MessageBox.Show(string.Format("{0} Won !!!{1}Play Another Round?",
-                                    i_WinnerName, Environment.NewLine), "Checkers", MessageBoxButtons.YesNo);
+            DialogResult result = MessageBox.Show(
+                string.Format("{0} Won !!!{1}Play Another Round?", i_WinnerName, Environment.NewLine),
+                "Checkers",
+                MessageBoxButtons.YesNo);
 
             if (result == DialogResult.Yes)
             {
