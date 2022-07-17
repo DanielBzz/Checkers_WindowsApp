@@ -51,7 +51,7 @@ namespace Checkers
                 toolToMove.CheckOppurturnitiToEat(io_GameBoard, io_PlayerMoves);
             }
 
-            switchToKing(toolToMove, io_GameBoard);
+            checkIfBecomeKing(toolToMove, io_GameBoard);
         }
 
         protected virtual void OnMove(Board io_GameBoard, GameTool io_ToolToMove)
@@ -86,7 +86,7 @@ namespace Checkers
             }
         }
 
-        private void switchToKing(GameTool io_Tool, Board i_GameBoard)
+        private void checkIfBecomeKing(GameTool io_Tool, Board i_GameBoard)
         {
             if (!io_Tool.IsKing() && i_GameBoard.ToolInEndLine(io_Tool))
             {

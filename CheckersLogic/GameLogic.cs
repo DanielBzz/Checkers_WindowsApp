@@ -7,6 +7,7 @@ namespace Checkers
     {
         public event Action<string> GameOver;
 
+        private readonly Random r_Random = new Random();
         private Board m_Board = null;
         private Player m_CurrentPlayer = null;
         private Player m_OpponentPlayer = null;
@@ -66,18 +67,18 @@ namespace Checkers
 
         public bool IsAvailableMove(Move i_Move)
         {
-            bool isAvailabe = false;
+            bool isAvailable = false;
 
             foreach (Move move in m_CurrentPlayer.ValidMoves)
             {
                 if (Move.IsEquals(move, i_Move))
                 {
-                    isAvailabe = true;
+                    isAvailable = true;
                     break;
                 }
             }
 
-            return isAvailabe;
+            return isAvailable;
         }
 
         public void BulidMoveList()
@@ -152,15 +153,7 @@ namespace Checkers
 
         public Move GetComputerMove()
         {
-            Random random = new Random();
-
-            return m_CurrentPlayer.ValidMoves[random.Next(m_CurrentPlayer.ValidMoves.Count - 1)];
-        }
-
-        public void CurrentPlayerQuitMatch() // we dont need it in this version
-        {
-            SwapPlayers();
-            m_CurrentPlayer.Score -= 3;
+            return m_CurrentPlayer.ValidMoves[r_Random.Next(m_CurrentPlayer.ValidMoves.Count - 1)];
         }
 
         public bool IsComputerTurn()

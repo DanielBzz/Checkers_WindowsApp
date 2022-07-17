@@ -10,35 +10,39 @@ namespace CheckersWindowsUI
         private readonly FormWelcome r_WelcomeForm = new FormWelcome();
         private readonly FormGameSettings r_SettingsForm = new FormGameSettings();
         private readonly FormGame r_GameForm = new FormGame();
-        private Timer timer = new System.Windows.Forms.Timer();
+        private readonly Timer r_ComputerTurnTimer = new System.Windows.Forms.Timer();
 
         public void Run()
         {
             Application.EnableVisualStyles();
-            initFormsEvent();
+            initFormsEvents();
             r_WelcomeForm.ShowDialog();
+            if (r_SettingsForm.DialogResult == DialogResult.OK)
+            {
+                r_GameForm.ShowDialog();
+            }
         }
 
-        public void initFormsEvent()
+        private void initFormsEvents()
         {
             r_WelcomeForm.StartGame += welcomeForm_StartGame;
             r_SettingsForm.DoneFillForm += settingsForm_DoneFillForm;
             r_GameForm.chosenMove += gameForm_ChosenMove;
             r_Game.GameOver += r_GameForm.game_GameOver;
             r_GameForm.NewMatch += StartNewSingleMatch;
-            timer.Tick += Timer_Tick;
+            r_ComputerTurnTimer.Tick += Timer_Tick;
         }
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            timer.Stop();
+            r_ComputerTurnTimer.Stop();
             executeComputerTurn();
         }
 
         private void StartNewSingleMatch()
         {
             r_Game.ResetGame();
-            r_GameForm.initMatrixToBoard(r_Game.Board);
+            r_GameForm.InitMatrixToBoard(r_Game.Board);
             r_GameForm.UpdateScoreLabels(r_Game.CurrentPlayer.Name, r_Game.CurrentPlayer.Score,
                                         r_Game.OpponentPlayer.Name, r_Game.OpponentPlayer.Score);
             r_Game.BulidMoveList();
@@ -52,13 +56,15 @@ namespace CheckersWindowsUI
             r_Game.BulidMoveList();
             if (!r_Game.checkIfGameOver() && r_Game.IsComputerTurn())
             {
-                executeComputerTurn();
+                r_ComputerTurnTimer.Interval = 500;
+                r_ComputerTurnTimer.Start();
             }
         }
 
         private void executeComputerTurn()
         {
             Move nextComputerMove = r_Game.GetComputerMove();
+
             r_GameForm.RegisterMoveToEvents(nextComputerMove);
             r_Game.ExecutePlayerMove(nextComputerMove);
             if (!r_Game.CheckForDoubleStrike(nextComputerMove.IsAnEatingStep()))
@@ -67,9 +73,8 @@ namespace CheckersWindowsUI
             }
             else
             {
-                timer.Enabled = true;
-                timer.Interval = 500;
-                timer.Start();
+                r_ComputerTurnTimer.Interval = 500;
+                r_ComputerTurnTimer.Start();
             }
         }
 
@@ -87,9 +92,7 @@ namespace CheckersWindowsUI
             r_Game.SwapPlayers();
             r_GameForm.InitBoardOnForm((int)r_SettingsForm.BoardSize);
             StartNewSingleMatch();
-            r_SettingsForm.Hide(); // consider switching to Dispose
-            r_WelcomeForm.Dispose();
-            r_GameForm.ShowDialog();
+            r_WelcomeForm.Close();
         }
 
         private void gameForm_ChosenMove(Move i_Move)
@@ -99,7 +102,7 @@ namespace CheckersWindowsUI
                 r_Game.ExecutePlayerMove(i_Move);
                 if (!r_Game.CheckForDoubleStrike(i_Move.IsAnEatingStep()))
                 {
-                    endTurn(); // maybe keep pointing on the tool in the ui
+                    endTurn();
                 }
             }
             else

@@ -79,6 +79,7 @@ namespace CheckersWindowsUI
                 Close();
                 if (DoneFillForm != null)
                 {
+                    DialogResult = DialogResult.OK;
                     DoneFillForm(this, null);
                 }
             }

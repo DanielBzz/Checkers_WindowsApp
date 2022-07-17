@@ -36,18 +36,6 @@ namespace Checkers
             }
         }
 
-        public static bool ValidSize(string i_BoardSize, out int o_ValidBoardSize)
-        {
-            bool isNumeric = int.TryParse(i_BoardSize, out o_ValidBoardSize);
-
-            return isNumeric && lagalBoardSize(o_ValidBoardSize);
-        }
-
-        private static bool lagalBoardSize(int i_ValidSize)
-        {
-            return i_ValidSize == (int)eBoardSize.Small || i_ValidSize == (int)eBoardSize.Medium || i_ValidSize == (int)eBoardSize.Large;
-        }
-
         public void AddToolToSquare(GameTool i_AddTool, Point i_NewLocation)
         {
             r_GameBoard[i_NewLocation.Y, i_NewLocation.X] = i_AddTool;

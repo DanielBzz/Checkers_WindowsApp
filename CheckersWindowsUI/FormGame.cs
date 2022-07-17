@@ -60,7 +60,7 @@ namespace CheckersWindowsUI
             }
         }
 
-        public void initMatrixToBoard(Board i_Board)
+        public void InitMatrixToBoard(Board i_Board)
         {
             for (int row = 0; row < i_Board.Size; ++row)
             {
@@ -108,27 +108,11 @@ namespace CheckersWindowsUI
             }
         }
 
-        private void pictureBox_Clicked(object sender, EventArgs e)
+        public void RegisterMoveToEvents(Move io_Move)
         {
-            PictureBox chosenPictureBox = sender as PictureBox;
-
-            if (r_ToolChosen == null && chosenPictureBox.Tag is eTeamSign sign && sign.Equals(m_CurrentTeamTurn))
-            {
-                r_ToolChosen = chosenPictureBox;
-                chosenPictureBox.BackColor = Color.LightSkyBlue;
-            }
-            else if (r_ToolChosen != null)
-            {
-                if (r_ToolChosen == chosenPictureBox)
-                {
-                    chosenPictureBox.BackColor = Color.Transparent;
-                    r_ToolChosen = null;
-                }
-                else
-                {
-                    OnChosenMove(chosenPictureBox);
-                }
-            }
+            io_Move.MoveTool += nextMove_MoveTool;
+            io_Move.EatTool += nextMove_EatTool;
+            io_Move.SwitchedToKing += nextMove_switchKing;
         }
 
         protected virtual void OnChosenMove(PictureBox i_DestinationBox)
@@ -154,11 +138,27 @@ namespace CheckersWindowsUI
             return nextMove;
         }
 
-        public void RegisterMoveToEvents(Move io_Move)
+        private void pictureBox_Clicked(object sender, EventArgs e)
         {
-            io_Move.MoveTool += nextMove_MoveTool;
-            io_Move.EatTool += nextMove_EatTool;
-            io_Move.SwitchedToKing += nextMove_switchKing;
+            PictureBox chosenPictureBox = sender as PictureBox;
+
+            if (r_ToolChosen == null && chosenPictureBox.Tag is eTeamSign sign && sign.Equals(m_CurrentTeamTurn))
+            {
+                r_ToolChosen = chosenPictureBox;
+                chosenPictureBox.BackColor = Color.LightSkyBlue;
+            }
+            else if (r_ToolChosen != null)
+            {
+                if (r_ToolChosen == chosenPictureBox)
+                {
+                    chosenPictureBox.BackColor = Color.Transparent;
+                    r_ToolChosen = null;
+                }
+                else
+                {
+                    OnChosenMove(chosenPictureBox);
+                }
+            }
         }
 
         private void nextMove_switchKing(Checkers.Point i_Location)
