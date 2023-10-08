@@ -6,7 +6,7 @@ it leverages the power of events and delegates to provide an interactive gaming 
 ## Installation
 - Clone the repository:  git clone https://github.com/DanielBzz/Checkers_WindowsApp.git
 - Open the project in Visual Studio.
-- Build and run the solution.
-
+- Build the logic solution.
+- Build and run the ui solution.
 ## How to Play
 instructions on how to play the game - [click here](https://www.usatoday.com/story/graphics/2023/01/23/how-to-play-checkers-rules-strategy/10795787002/)
